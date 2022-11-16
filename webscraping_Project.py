@@ -14,13 +14,13 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML
 req = Request(url, headers=headers)
 webpage = urlopen(req).read()
 soup = BeautifulSoup(webpage, 'html.parser')
-
+# Extracting Data from website
 crypto_info = soup.find('tbody').find_all('tr')
 names = []
 curr_price = []
 percent_change = []
 corr_price = []
-
+# for formating current price, percent change, and corresponding
 for i in range(5):
     this_crypto = crypto_info[i].find_all('td')
     newName = this_crypto[2].text
@@ -47,6 +47,7 @@ for i in range(5):
     print(names[i], curr_price[i], percent_change[i], '\t\t\t', corr_price[i])
     print('-----------------------------------------------------------------------------------------------------------------')
 
+#Text to Phone
 for i in range(5):
     b = ""; sendText = False
     if "Bitcoin" in names[i] and float(curr_price[i].strip('$').replace(',', '')) < 40000:
